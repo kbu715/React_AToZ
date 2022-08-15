@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { todoListStatsState } from "../states";
+import { todoListStatsState } from "../../states";
 
 export default function TodoListStats() {
   const { totalNum, totalCompletedNum, totalUncompletedNum, percentCompleted } =

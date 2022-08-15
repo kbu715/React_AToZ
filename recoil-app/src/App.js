@@ -1,5 +1,5 @@
 import { RecoilRoot } from "recoil";
-import TodoList from "./components/TodoList";
+import TodoList from "./components/todo/TodoList";
 // import CharacterCounter from "./components/CharacterCounter";
 
 function App() {

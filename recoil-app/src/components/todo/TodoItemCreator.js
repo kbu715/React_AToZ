@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { todoListState } from "../states";
+import { todoListState } from "../../states";
 
 export default function TodoItemCreator() {
   const inputRef = useRef(undefined);
