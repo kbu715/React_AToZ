@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { todoListState } from "./todos";
 
 const textState = atom({
   key: "textState", // unique ID (with respect to other atoms/selectors)
@@ -14,4 +15,4 @@ const charCountState = selector({
   },
 });
 
-export { textState, charCountState };
+export { textState, charCountState, todoListState };
