@@ -10,7 +10,7 @@ export default function TodoList() {
   const todoList = useRecoilValue(filteredTodoListState);
 
   return (
-    <div className="container">
+    <div>
       <TodoListStats />
       <TodoListFilters />
       <TodoItemCreator />
