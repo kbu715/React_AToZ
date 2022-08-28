@@ -12,8 +12,8 @@ function App() {
       <div className="App">
         <h1>Blog Posts</h1>
         <Posts />
+        <ReactQueryDevtools />
       </div>
-      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
