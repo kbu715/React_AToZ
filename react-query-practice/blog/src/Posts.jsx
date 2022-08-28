@@ -15,7 +15,9 @@ export function Posts() {
   const [selectedPost, setSelectedPost] = useState(null);
 
   // replace with useQuery
-  const { data, isLoading, isError, error } = useQuery("posts", fetchPosts);
+  const { data, isLoading, isError, error } = useQuery("posts", fetchPosts, {
+    staleTime: 2000, //while 2sec, status will be fresh
+  });
 
   if (isLoading) return <div>Loading...</div>;
   // React-Query는 기본적으로 3번의 시도 끝에 에러가 있으면 에러를 보여준다
