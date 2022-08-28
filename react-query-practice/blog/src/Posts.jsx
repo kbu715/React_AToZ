@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { useQuery } from "react-query";
 import { PostDetail } from "./PostDetail";
 const maxPostPage = 10;
 
@@ -15,7 +15,17 @@ export function Posts() {
   const [selectedPost, setSelectedPost] = useState(null);
 
   // replace with useQuery
-  const data = [];
+  const { data, isLoading, isError, error } = useQuery("posts", fetchPosts);
+
+  if (isLoading) return <div>Loading...</div>;
+  // React-Query는 기본적으로 3번의 시도 끝에 에러가 있으면 에러를 보여준다
+  if (isError)
+    return (
+      <>
+        <h3>Oops, something went wrong!</h3>
+        <p>{error.toString()}</p>
+      </>
+    );
 
   return (
     <>
