@@ -4,6 +4,7 @@ import Item from "./Item";
 
 const List = React.memo(({ todoData, setTodoData, handleClick }) => {
   console.log("List is Rendering");
+
   const handleEnd = (result) => {
     if (!result.destination) return;
 
