@@ -9,6 +9,7 @@ export default function Item({
   provided,
   snapshot,
 }) {
+  console.log("Item is Rendering");
   const handleCompleteChange = (id) => {
     let newTodoData = todoData.map((todo) => {
       if (todo.id === id) {

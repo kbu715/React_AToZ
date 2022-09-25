@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 
 function Form({ value, setValue, handleSubmit }, ref) {
+  console.log("Form is Rendering");
   const handleChange = (e) => setValue(e.target.value);
 
   return (

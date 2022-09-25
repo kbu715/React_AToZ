@@ -3,6 +3,7 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 export default function App() {
+  console.log("App is Rendering");
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
 
