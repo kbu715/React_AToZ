@@ -16,6 +16,7 @@ const List = React.memo(({ todoData, setTodoData, handleClick }) => {
     // 3. 잡아준 아이템을 삽입한다.
     newTodoData.splice(result.destination.index, 0, reorderedItem);
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
   };
   return (
     <div>

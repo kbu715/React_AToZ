@@ -23,6 +23,7 @@ export default function Item({
       return todo;
     });
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
   };
 
   const handleEditChange = (e) => {
@@ -40,6 +41,7 @@ export default function Item({
     });
 
     setTodoData(newTodoData);
+    localStorage.setItem("todoData", JSON.stringify(newTodoData));
     setIsEditing(false);
   };
 
@@ -86,9 +88,6 @@ export default function Item({
             type="checkbox"
             defaultChecked={completed}
             onChange={() => handleCompleteChange(id)}
-            style={{
-              cursor: "pointer",
-            }}
             className="mr-2"
           />
           <span className={`${completed ? "line-through" : undefined}`}>

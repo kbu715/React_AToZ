@@ -4,7 +4,10 @@ import Form from "./components/Form";
 import List from "./components/List";
 export default function App() {
   console.log("App is Rendering");
-  const [todoData, setTodoData] = useState([]);
+  const initialData = localStorage.getItem("todoData")
+    ? JSON.parse(localStorage.getItem("todoData"))
+    : [];
+  const [todoData, setTodoData] = useState(initialData);
   const [value, setValue] = useState("");
 
   const inputRef = useRef(null);
@@ -13,6 +16,7 @@ export default function App() {
     (id) => {
       let newTodoData = todoData.filter((todo) => todo.id !== id);
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
     },
     [todoData]
   );
@@ -33,6 +37,7 @@ export default function App() {
       };
 
       setTodoData((prev) => [...prev, newTodo]);
+      localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
       setValue("");
 
       inputRef.current.focus();
@@ -42,6 +47,7 @@ export default function App() {
 
   const handleRemoveAllClick = () => {
     setTodoData([]);
+    localStorage.setItem("todoData", JSON.stringify([]));
   };
 
   return (
