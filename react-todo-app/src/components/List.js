@@ -2,7 +2,7 @@ import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Item from "./Item";
 
-const List = React.memo(({ todoData, setTodoData }) => {
+const List = React.memo(({ todoData, setTodoData, handleClick }) => {
   console.log("List is Rendering");
   const handleEnd = (result) => {
     if (!result.destination) return;
@@ -33,6 +33,7 @@ const List = React.memo(({ todoData, setTodoData }) => {
                       setTodoData={setTodoData}
                       provided={provided}
                       snapshot={snapshot}
+                      handleClick={handleClick}
                     />
                   )}
                 </Draggable>

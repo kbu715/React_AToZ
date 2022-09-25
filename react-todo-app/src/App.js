@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
@@ -9,25 +9,36 @@ export default function App() {
 
   const inputRef = useRef(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((todo) => todo.id !== id);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
 
-    if (value === "") {
-      alert("내용을 입력해주세요.");
-      return;
-    }
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
 
-    let newTodo = {
-      id: Date.now(),
-      title: value,
-      completed: false,
-    };
+      if (value === "") {
+        alert("내용을 입력해주세요.");
+        return;
+      }
 
-    setTodoData((prev) => [...prev, newTodo]);
-    setValue("");
+      let newTodo = {
+        id: Date.now(),
+        title: value,
+        completed: false,
+      };
 
-    inputRef.current.focus();
-  };
+      setTodoData((prev) => [...prev, newTodo]);
+      setValue("");
+
+      inputRef.current.focus();
+    },
+    [value]
+  );
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
@@ -36,7 +47,11 @@ export default function App() {
           <h1>할 일 목록</h1>
         </div>
 
-        <List todoData={todoData} setTodoData={setTodoData} />
+        <List
+          todoData={todoData}
+          setTodoData={setTodoData}
+          handleClick={handleClick}
+        />
         <Form
           value={value}
           setValue={setValue}

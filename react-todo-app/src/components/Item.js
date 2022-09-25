@@ -8,6 +8,7 @@ export default function Item({
   setTodoData,
   provided,
   snapshot,
+  handleClick,
 }) {
   console.log("Item is Rendering");
   const handleCompleteChange = (id) => {
@@ -20,10 +21,6 @@ export default function Item({
     setTodoData(newTodoData);
   };
 
-  const handleClick = (id) => {
-    let newTodoData = todoData.filter((todo) => todo.id !== id);
-    setTodoData(newTodoData);
-  };
   return (
     <div
       {...provided.draggableProps}

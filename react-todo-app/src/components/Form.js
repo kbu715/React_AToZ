@@ -28,4 +28,4 @@ function Form({ value, setValue, handleSubmit }, ref) {
   );
 }
 
-export default forwardRef(Form);
+export default React.memo(forwardRef(Form));
