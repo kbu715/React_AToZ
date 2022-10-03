@@ -8,6 +8,7 @@ const toast = createStandaloneToast({ theme });
 function queryErrorHandler(error: unknown): void {
   // error is type unknown because in js, anything can be an error (e.g. throw(5))
   // const id = `react-query-error@${new Date()}`;
+  // Error: Javascript Error Class
   const title =
     error instanceof Error ? error.message : '서버 연결중 에러 발생!';
 

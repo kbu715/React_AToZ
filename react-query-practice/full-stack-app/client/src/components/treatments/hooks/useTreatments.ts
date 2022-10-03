@@ -16,7 +16,7 @@ export function useTreatments(): Treatment[] {
   return data;
 }
 
-// 캐시를 채우기 위해
+// 캐시를 채우기 위해 Pre-fetch
 export function usePrefetchTreatments(): void {
   const queryClient = useQueryClient();
   queryClient.prefetchQuery(queryKeys.treatments, getTreatments);

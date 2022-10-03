@@ -32,7 +32,7 @@ export function Posts() {
     () => fetchPosts(currentPage),
     {
       staleTime: 2000, //while 2sec, status will be fresh
-      keepPreviousData: true,
+      keepPreviousData: true, // 혹시나 이전 페이지로 돌아갔을 때에도 캐시에 해당 데이터가 있도록 만들고 싶을 때
     }
   );
 
