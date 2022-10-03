@@ -114,6 +114,7 @@ export function useAppointments(): UseAppointments {
       refetchOnMount: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
+      refetchInterval: 60000, // every minute
     },
   );
   // keepPreviousData only useful if background doesn't change
