@@ -1,6 +1,12 @@
 // @ts-nocheck
 import dayjs from 'dayjs';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 
 import { axiosInstance } from '../../../axiosInstance';
@@ -50,6 +56,7 @@ export function useAppointments(): UseAppointments {
   function updateMonthYear(monthIncrement: number): void {
     setMonthYear((prevData) => getNewMonthYear(prevData, monthIncrement));
   }
+
   /** ****************** END 1: monthYear state ************************* */
   /** ****************** START 2: filter appointments  ****************** */
   // State and functions for filtering appointments to show all or only available
@@ -82,9 +89,19 @@ export function useAppointments(): UseAppointments {
   //       monthYear.month
   const fallback = {};
 
+  const selectFn = useCallback(
+    (data: AppointmentDateMap) => {
+      getAvailableAppointments(data, user);
+    },
+    [user],
+  );
+
   const { data: appointments = fallback } = useQuery(
     [queryKeys.appointments, monthYear.year, monthYear.month],
     () => getAppointments(monthYear.year, monthYear.month),
+    {
+      select: showAll ? undefined : selectFn,
+    },
   );
   // keepPreviousData only useful if background doesn't change
   // The calendar background changes every month
