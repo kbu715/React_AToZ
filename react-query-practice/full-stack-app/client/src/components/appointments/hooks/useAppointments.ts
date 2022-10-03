@@ -16,6 +16,13 @@ import { AppointmentDateMap } from '../types';
 import { getAvailableAppointments } from '../utils';
 import { getMonthYearDetails, getNewMonthYear, MonthYear } from './monthYear';
 
+// staleTime, cacheTime applies to both prefetchQuery and useQuery
+// so make common options
+const commonOptions = {
+  staleTime: 0,
+  cacheTime: 300000, // set to default(5min)
+};
+
 // for useQuery call
 export async function getAppointments(
   year: string,
@@ -74,6 +81,7 @@ export function useAppointments(): UseAppointments {
     queryClient.prefetchQuery(
       [queryKeys.appointments, nextMonthYear.year, nextMonthYear.month],
       () => getAppointments(nextMonthYear.year, nextMonthYear.month),
+      commonOptions,
     );
   }, [queryClient, monthYear]);
 
@@ -101,6 +109,11 @@ export function useAppointments(): UseAppointments {
     () => getAppointments(monthYear.year, monthYear.month),
     {
       select: showAll ? undefined : selectFn,
+      // override
+      ...commonOptions,
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
     },
   );
   // keepPreviousData only useful if background doesn't change
