@@ -16,13 +16,8 @@ function App() {
   ];
   const [todoData, setTodoData] = useState<TodoData[]>(initialData);
   const [inputValue, setInputValue] = useState("");
-  const todoItem = (completed: boolean) => {
+  const getLineThrough = (completed: boolean) => {
     return {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
       textDecoration: completed ? "line-through" : "none",
     };
   };
@@ -68,8 +63,8 @@ function App() {
         {todoData.length ? (
           <ul className="todo-list">
             {todoData.map((item) => (
-              <li key={item.id} style={todoItem(item.completed)}>
-                <div>
+              <li key={item.id} className="todo-item">
+                <div style={getLineThrough(item.completed)}>
                   <input
                     type="checkbox"
                     defaultChecked={item.completed}
