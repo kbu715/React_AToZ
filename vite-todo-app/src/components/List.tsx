@@ -1,55 +1,26 @@
 import React from "react";
+import Item from "./Item";
 
 interface ListProps {
   todoData: TodoData[];
   setTodoData: React.Dispatch<React.SetStateAction<TodoData[]>>;
 }
 
-function List({ todoData, setTodoData }: ListProps) {
-  const getLineThrough = (completed: boolean) => {
-    return {
-      textDecoration: completed ? "line-through" : "none",
-    };
-  };
-
-  const handleClick = (id: ID) => {
-    let newTodoData = todoData.filter((item) => item.id !== id);
-    setTodoData(newTodoData);
-  };
-
-  const handleCompleteChange = (id: ID) => {
-    let newTodoData = todoData.map((item) => {
-      if (item.id === id) {
-        item.completed = !item.completed;
-      }
-      return item;
-    });
-    setTodoData(newTodoData);
-  };
-
+const List = React.memo(({ todoData, setTodoData }: ListProps) => {
+  console.log("List Component");
   return (
     <div>
       {todoData.length ? (
         <ul className="todo-list">
           {todoData.map((item) => (
-            <li key={item.id} className="todo-item">
-              <div style={getLineThrough(item.completed)}>
-                <input
-                  type="checkbox"
-                  defaultChecked={item.completed}
-                  onChange={() => handleCompleteChange(item.id)}
-                  name=""
-                  id=""
-                />
-                {item.title}
-              </div>
-              <button
-                className="todo-x-btn"
-                onClick={() => handleClick(item.id)}
-              >
-                x
-              </button>
-            </li>
+            <Item
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              completed={item.completed}
+              todoData={todoData}
+              setTodoData={setTodoData}
+            />
           ))}
         </ul>
       ) : (
@@ -57,6 +28,6 @@ function List({ todoData, setTodoData }: ListProps) {
       )}
     </div>
   );
-}
+});
 
 export default List;

@@ -6,7 +6,9 @@ interface FormProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-function Form({ inputValue, setInputValue, handleSubmit }: FormProps) {
+const Form = ({ inputValue, setInputValue, handleSubmit }: FormProps) => {
+  console.log("Form Component");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -23,6 +25,6 @@ function Form({ inputValue, setInputValue, handleSubmit }: FormProps) {
       <input type="submit" className="btn" value="입력" />
     </form>
   );
-}
+};
 
 export default Form;

@@ -3,6 +3,7 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 function App() {
+  console.log("App Component");
   const initialData = [
     {
       id: "1",
