@@ -40,11 +40,18 @@ function App() {
     setTodoData((prev) => [...prev, newTodo]);
   };
 
+  const handleRemoveAll = useCallback(() => {
+    setTodoData([]);
+  }, []);
+
   return (
     <div className="container">
       <section className="todo-box">
-        <header>
+        <header className="todo-header">
           <h2>할 일 목록</h2>
+          {todoData.length > 0 && (
+            <button onClick={handleRemoveAll}>Delete All</button>
+          )}
         </header>
         <List
           todoData={todoData}
