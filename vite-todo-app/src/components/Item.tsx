@@ -6,20 +6,16 @@ interface ItemProps {
   completed: boolean;
   todoData: TodoData[];
   setTodoData: React.Dispatch<React.SetStateAction<TodoData[]>>;
+  handleClick: (id: ID) => void;
 }
 
 const Item = React.memo(
-  ({ id, title, completed, todoData, setTodoData }: ItemProps) => {
+  ({ id, title, completed, todoData, setTodoData, handleClick }: ItemProps) => {
     console.log("Item Component");
     const getLineThrough = (completed: boolean) => {
       return {
         textDecoration: completed ? "line-through" : "none",
       };
-    };
-
-    const handleClick = (id: ID) => {
-      let newTodoData = todoData.filter((item) => item.id !== id);
-      setTodoData(newTodoData);
     };
 
     const handleCompleteChange = (id: ID) => {

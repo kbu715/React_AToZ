@@ -4,9 +4,10 @@ import Item from "./Item";
 interface ListProps {
   todoData: TodoData[];
   setTodoData: React.Dispatch<React.SetStateAction<TodoData[]>>;
+  handleClick: (id: ID) => void;
 }
 
-const List = React.memo(({ todoData, setTodoData }: ListProps) => {
+const List = React.memo(({ todoData, setTodoData, handleClick }: ListProps) => {
   console.log("List Component");
   return (
     <div>
@@ -20,6 +21,7 @@ const List = React.memo(({ todoData, setTodoData }: ListProps) => {
               completed={item.completed}
               todoData={todoData}
               setTodoData={setTodoData}
+              handleClick={handleClick}
             />
           ))}
         </ul>

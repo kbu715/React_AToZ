@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState, useCallback } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
@@ -19,6 +19,14 @@ function App() {
   const [todoData, setTodoData] = useState<TodoData[]>(initialData);
   const [inputValue, setInputValue] = useState("");
 
+  const handleClick = useCallback(
+    (id: ID) => {
+      let newTodoData = todoData.filter((item) => item.id !== id);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -38,7 +46,11 @@ function App() {
         <header>
           <h2>할 일 목록</h2>
         </header>
-        <List todoData={todoData} setTodoData={setTodoData} />
+        <List
+          todoData={todoData}
+          setTodoData={setTodoData}
+          handleClick={handleClick}
+        />
       </section>
       <Form
         inputValue={inputValue}
