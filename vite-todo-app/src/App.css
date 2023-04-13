@@ -24,6 +24,29 @@
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px #ccc dotted;
+  width: 100%;
+}
+
+.todo-item form {
+  display: inline-flex;
+  flex: 1;
+}
+
+.todo-item-save-btn {
+  margin-right: 10px;
+}
+
+.todo-item-edit-input {
+  width: 100%;
+}
+
+.todo-item-btn-group {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.todo-item-btn-group button:first-child {
+  margin-right: 10px;
 }
 
 .todo-x-btn {

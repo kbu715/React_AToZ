@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface ItemProps {
   id: ID;
@@ -11,7 +11,9 @@ interface ItemProps {
 
 const Item = React.memo(
   ({ id, title, completed, todoData, setTodoData, handleClick }: ItemProps) => {
-    console.log("Item Component");
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTitle, setEditedTitle] = useState(title);
+
     const getLineThrough = (completed: boolean) => {
       return {
         textDecoration: completed ? "line-through" : "none",
@@ -27,23 +29,72 @@ const Item = React.memo(
       });
       setTodoData(newTodoData);
     };
-    return (
-      <li key={id} className="todo-item">
-        <div style={getLineThrough(completed)}>
-          <input
-            type="checkbox"
-            defaultChecked={completed}
-            onChange={() => handleCompleteChange(id)}
-            name=""
-            id=""
-          />
-          {title}
-        </div>
-        <button className="todo-x-btn" onClick={() => handleClick(id)}>
-          x
-        </button>
-      </li>
-    );
+
+    const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedTitle(e.target.value);
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      let newTodoData = todoData.map((data) => {
+        if (data.id === id) {
+          data.title = editedTitle;
+        }
+        return data;
+      });
+      setTodoData(newTodoData);
+      setIsEditing(false);
+    };
+
+    if (isEditing) {
+      return (
+        <li key={id} className="todo-item">
+          <form onSubmit={handleSubmit}>
+            <input
+              value={editedTitle}
+              onChange={handleEditChange}
+              autoFocus
+              className="todo-item-edit-input"
+            />
+            <button type="submit" className="todo-item-save-btn">
+              save
+            </button>
+          </form>
+          <button className="todo-x-btn" onClick={() => setIsEditing(false)}>
+            x
+          </button>
+        </li>
+      );
+    } else {
+      return (
+        <li key={id} className="todo-item">
+          <div style={getLineThrough(completed)}>
+            <input
+              type="checkbox"
+              defaultChecked={completed}
+              onChange={() => handleCompleteChange(id)}
+              name=""
+              id=""
+            />
+            {title}
+          </div>
+          <div className="todo-item-btn-group">
+            <button
+              className="todo-edit-btn"
+              onClick={() => {
+                setIsEditing(true);
+              }}
+            >
+              edit
+            </button>
+            <button className="todo-x-btn" onClick={() => handleClick(id)}>
+              x
+            </button>
+          </div>
+        </li>
+      );
+    }
   }
 );
 
