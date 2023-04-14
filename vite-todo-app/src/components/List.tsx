@@ -7,10 +7,20 @@ interface ListProps {
   handleClick: (id: ID) => void;
 }
 
+function getStyle(len: number) {
+  if (len === 0) {
+    return {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    };
+  } else return undefined;
+}
+
 const List = React.memo(({ todoData, setTodoData, handleClick }: ListProps) => {
   console.log("List Component");
   return (
-    <div>
+    <div style={getStyle(todoData.length)}>
       {todoData.length ? (
         <ul className="todo-list">
           {todoData.map((item) => (

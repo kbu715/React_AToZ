@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { setLocalStorage } from "../utils";
 
 interface ItemProps {
   id: ID;
@@ -28,6 +29,7 @@ const Item = React.memo(
         return item;
       });
       setTodoData(newTodoData);
+      setLocalStorage("todoData", newTodoData);
     };
 
     const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +46,7 @@ const Item = React.memo(
         return data;
       });
       setTodoData(newTodoData);
+      setLocalStorage("todoData", newTodoData);
       setIsEditing(false);
     };
 

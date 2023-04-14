@@ -2,20 +2,10 @@ import { useState, useCallback } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
+import { getLocalStorage, setLocalStorage } from "./utils";
 function App() {
   console.log("App Component");
-  const initialData = [
-    {
-      id: "1",
-      title: "vite 공부",
-      completed: false,
-    },
-    {
-      id: "2",
-      title: "TS 공부",
-      completed: true,
-    },
-  ];
+  const initialData = getLocalStorage("todoData");
   const [todoData, setTodoData] = useState<TodoData[]>(initialData);
   const [inputValue, setInputValue] = useState("");
 
@@ -23,6 +13,7 @@ function App() {
     (id: ID) => {
       let newTodoData = todoData.filter((item) => item.id !== id);
       setTodoData(newTodoData);
+      setLocalStorage("todoData", newTodoData);
     },
     [todoData]
   );
@@ -38,10 +29,12 @@ function App() {
     };
 
     setTodoData((prev) => [...prev, newTodo]);
+    setLocalStorage("todoData", [...todoData, newTodo]);
   };
 
   const handleRemoveAll = useCallback(() => {
     setTodoData([]);
+    setLocalStorage("todoData", []);
   }, []);
 
   return (
